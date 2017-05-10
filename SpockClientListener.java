@@ -26,11 +26,13 @@ public class SpockClientListener implements Runnable
 		{
 			Spock game = new Spock();
 			// Welcome Speech
-			System.out.println("\nWelcome to Rock, Paper, Scissors, Lizard, Spock!\n");
-			System.out.println("Incase you forgot how to spell your options, check out the title.");
-			System.out.println("After both players have chosen their weapon we will tell you who won.");
-			System.out.println("Thanks and have fun!\n");
-			System.out.println("\nSelect Weapon: ");
+			System.out.println("\nXx--------------------------------------------------------------------------------xX");
+			System.out.println("                  Welcome to Rock, Paper, Scissors, Lizard, Spock!\n");
+			System.out.println("Rules:");
+			System.out.println("     1) Weapon Choices are case sensitive. Please refer to the title");
+			System.out.println("        incase you forgot how to spell.");
+			System.out.println("     2) WAIT until all players have logged in before choosing a weapon.");
+			System.out.println();
 			BufferedReader serverInput = new BufferedReader(new InputStreamReader(connectionSock.getInputStream()));
 			while (true)
 			{
