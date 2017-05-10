@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Spock
 {
-  public int[] heaps = {1, 3, 5, 7};
 
-  Spock()
-  {}
+  Spock() {
+	reset();
+  }
 
   public int isAlive[] = new int[5];
   public int isLocked[] = new int[5]; 
@@ -16,13 +16,8 @@ public class Spock
   public String player3 = "";
   public String player4 = "";
   public String player5 = "";
-//  public String playerChoices = "Default Player Choices";
   public String winners = "";
   public String playerChoices = "";
-  //Spock() {
-  //	reset();
-  // }
-
 
   public boolean isValidInputTwo(int playerNumber, String input) {
         input = input.toLowerCase();
@@ -54,22 +49,6 @@ public class Spock
 	player5 = "";
 //	playerChoices = "";
 	winners = "";
-  }
-
-  // return a visual of the stacks
-  public String getBoard()
-  {
-    String board = "";
-    for (int i = 0; i < 4; ++i)
-    {
-      board += (i + 1) + ": ";
-      for (int j = 0; j < heaps[i]; ++j)
-      {
-        board += "X ";
-      }
-      board += "\n";
-    }
-    return board;
   }
   
   public void assign(int player, String input) {
@@ -135,32 +114,17 @@ public class Spock
  public String displayWinners() {
 	winners = "";
 	String finalChoices = displayChoices();
-	String[] separated = finalChoices.split("\n");
-	for (int i = 0; i < separated.length; i++) {
-		for (int j = 0; j < isAlive.length; j++) {
-			if (j == 0 && isAlive[j] == 0) {
-				if (separated[i].contains("rock")) {
-					winners += "ROCK WINS";
-				}
-			} else if (j == 1 && isAlive[j] == 0) {
-                                if (separated[i].contains("scissors")) {
-                                        winners += "SCISSORS WINS";
-                                }
-                        } else if (j == 2 && isAlive[j] == 0) {
-                                if (separated[i].contains("paper")) {
-                                        winners += "PAPER WINS";
-                                }
-                        } else if (j == 3 && isAlive[j] == 0) {
-                                if (separated[i].contains("lizard")) {
-                                        winners += "LIZARD WINS";
-                                }
-                        } else if (j == 4 && isAlive[j] == 0) {
-                                if (separated[i].contains("spock")) {
-                                        winners += "SPOCK WINS";
-                                }
-                        }
-		}
-	}
+	if (isAlive[0] == 0 && finalChoices.contains("rock")) {
+		winners += "ROCK WINS";
+	} else if(isAlive[1] == 0 && finalChoices.contains("scissors")) {
+        	winners += "SCISSORS WINS";
+        } else if (isAlive[2] == 0 && finalChoices.contains("paper")) {
+        	winners += "PAPER WINS";
+        } else if (isAlive[3] == 0 && finalChoices.contains("lizard")) {
+        	winners += "LIZARD WINS";
+        } else if (isAlive[4] == 0 && finalChoices.contains("spock")) {
+        	winners += "SPOCK WINS";
+        }
 	return winners; 
   }
 
@@ -169,14 +133,7 @@ public class Spock
   // check win conditions
   public boolean isOver()
   {
-    int end1[] = {1, 0, 0, 0};
-    int end2[] = {0, 1, 0, 0};
-    int end3[] = {0, 0, 1, 0};
-    int end4[] = {0, 0, 0, 1};
-    if (Arrays.equals(end1, heaps) || Arrays.equals(end2, heaps) || Arrays.equals(end3, heaps) || Arrays.equals(end4, heaps))
-      return true;
-    else
-      return false;
+  	return false; 
   }
 
 }

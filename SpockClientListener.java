@@ -32,44 +32,34 @@ public class SpockClientListener implements Runnable
 			System.out.println("     1) Weapon Choices are case sensitive. Please refer to the title");
 			System.out.println("        incase you forgot how to spell.");
 			System.out.println("     2) WAIT until all players have logged in before choosing a weapon.");
-			System.out.println();
+			System.out.println("     3) Enter 'GO' only when after all players have locked in.");
+			System.out.println("     4) Enter 'RESET' to reset game\n");
+			System.out.println("Select Weapon: ");
 			BufferedReader serverInput = new BufferedReader(new InputStreamReader(connectionSock.getInputStream()));
 			while (true)
 			{
-				// Turn handling
-			//	if (playerTurn == 2)
-			//		playerTurn = 1;
-			//	else
-			//		playerTurn = 2;
-			//	System.out.println("It is player " + playerTurn + "'s turn:");
-			
-			//	System.out.println(game.getBoard());
 				// Get data sent from the server
 				String serverText = serverInput.readLine();
 				String[] serverTextArr = serverText.split(" ");
+				String command = serverTextArr[0].toLowerCase();
 				int currPlayer = Integer.parseInt(serverTextArr[2]);
 			        if (game.isValidInputTwo(currPlayer, serverTextArr[0])) {
-					System.out.println("Player " + serverTextArr[2] + " has locked in.");
+					System.out.println("\nUPDATE: Player " + serverTextArr[2] + " has locked in. Enter 'GO' to run game once all players have locked in.");
 					System.out.println();
-				} else if (serverTextArr[0].equals("display")) {
+				} else if (command.equals("display")) {
 					System.out.println(game.displayChoices());
-				} else if (serverTextArr[0].equals("go")) {
+				} else if (command.equals("go")) {
 					System.out.println(game.displayWinners()); 
 					System.out.println();
 					System.out.println(game.displayChoices());
-				} else {
-				//	System.out.println("serverText: " + serverTextArr[0]);
-					System.out.println();
-					System.out.println("Invalid Input, please try again: ");
+				} else if (command.equals("reset")) {
+					game.reset();
+					System.out.println("\n                                  Game has been RESET\n");
+					System.out.println("Select Weapon: ");
 				}      
 				
 				if (serverInput != null)
 				{
-					// get ints from string input, to be used in Nim's updateHeap()
-				//	String[] serverTextArr = serverText.split(" ");
-				//	int heap = Integer.parseInt(serverTextArr[0]);
-				//	int num = Integer.parseInt(serverTextArr[1]);
-				//	game.updateHeap((heap - 1), num);
 					if (game.isOver())
 					{
 						System.out.println("Game over my guys. Player " + playerTurn + " wins.");
