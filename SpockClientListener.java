@@ -29,7 +29,7 @@ public class SpockClientListener implements Runnable
 			System.out.println("\nXx--------------------------------------------------------------------------------xX");
 			System.out.println("                  Welcome to Rock, Paper, Scissors, Lizard, Spock!\n");
 			System.out.println("Rules:");
-			System.out.println("     1) Weapon Choices are case sensitive. Please refer to the title");
+			System.out.println("     1) Weapon choices are case sensitive. Please refer to the title");
 			System.out.println("        incase you forgot how to spell.");
 			System.out.println("     2) WAIT until all players have logged in before choosing a weapon.");
 			System.out.println("     3) Enter 'GO' only when after all players have locked in.");
@@ -43,18 +43,18 @@ public class SpockClientListener implements Runnable
 				String[] serverTextArr = serverText.split(" ");
 				String command = serverTextArr[0].toLowerCase();
 				int currPlayer = Integer.parseInt(serverTextArr[2]);
-			        if (game.isValidInputTwo(currPlayer, serverTextArr[0])) {
+			        if ((game.isLocked[currPlayer] == 0) && game.isValidInputTwo(currPlayer, serverTextArr[0])) {
 					System.out.println("\nUPDATE: Player " + serverTextArr[2] + " has locked in. Enter 'GO' to run game once all players have locked in.");
 					System.out.println();
 				} else if (command.equals("display")) {
-					System.out.println(game.displayChoices());
+					System.out.println("\n" + game.displayChoices());
 				} else if (command.equals("go")) {
-					System.out.println(game.displayWinners()); 
-					System.out.println();
-					System.out.println(game.displayChoices());
-				} else if (command.equals("reset")) {
+					System.out.println("\n" + game.displayWinners()); 
+					System.out.println("\n" + game.displayChoices());
+				} 
+				if (command.equals("reset") || command.equals("go")) {
 					game.reset();
-					System.out.println("\n                                  Game has been RESET\n");
+					System.out.println("\n                                Game has been RESET\n");
 					System.out.println("Select Weapon: ");
 				}      
 				
