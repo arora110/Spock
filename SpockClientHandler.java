@@ -1,5 +1,4 @@
-// Bobby Kain and Akash
-// edited version of Dr Fahys ClientHandler.java
+// Chinmai Raman and Akash Arora
 
 import java.net.Socket;
 import java.io.DataOutputStream;
@@ -9,13 +8,13 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class NimClientHandler implements Runnable
+public class SpockClientHandler implements Runnable
 {
 	private Socket connectionSock = null;
 	private ArrayList<Socket> socketList;
 	private int player;
-	private Nim game;
-	NimClientHandler(Socket sock, ArrayList<Socket> socketList, Nim game)
+	private Spock game;
+	SpockClientHandler(Socket sock, ArrayList<Socket> socketList, Spock game)
 	{
 		this.game = game;
 		this.connectionSock = sock;
@@ -88,4 +87,4 @@ public class NimClientHandler implements Runnable
 			socketList.remove(connectionSock);
 		}
 	}
-} // ClientHandler for MTServer.java
+} 

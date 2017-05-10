@@ -1,5 +1,4 @@
-// Bobby Kain and Akash
-// edited version of Dr Fahys Client.java
+// Chinmai Raman and Akash Arora
 
 import java.net.Socket;
 import java.io.DataOutputStream;
@@ -8,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class NimClient
+public class SpockClient
 {
 	public static void main(String[] args)
 	{
@@ -25,7 +24,7 @@ public class NimClient
 			System.out.println("Connection made.");
 
 			// Start a thread to listen and display data sent by the server
-			NimClientListener listener = new NimClientListener(connectionSock);
+			SpockClientListener listener = new SpockClientListener(connectionSock);
 			Thread theThread = new Thread(listener);
 			theThread.start();
 
@@ -44,4 +43,4 @@ public class NimClient
 			System.out.println(e.getMessage());
 		}
 	}
-} // MTClient
+} 
