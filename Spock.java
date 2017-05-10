@@ -114,6 +114,9 @@ public class Spock
 			}
 		}
 	}
+	for (int m = 0; m < separated.length; m++) {
+		winners += separated[m];
+	}
 	return winners; 
   }
 

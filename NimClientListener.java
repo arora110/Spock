@@ -1,4 +1,4 @@
-// Chinmai Raman and Akash Arora
+// Bobby Kain and Akash
 // edited version of Dr Fahys ClientListener.java
 
 import java.net.Socket;
@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class SpockClientListener implements Runnable
+public class NimClientListener implements Runnable
 {
 	private Socket connectionSock = null;
 
-//	int playerTurn = 2;
+	int playerTurn = 2;
 
-	SpockClientListener(Socket sock)
+	NimClientListener(Socket sock)
 	{
 		this.connectionSock = sock;
 	}
@@ -25,7 +25,7 @@ public class SpockClientListener implements Runnable
     // Wait for data from the server.  If received, output it.
 		try
 		{
-		//	Spock game = new Spock();	
+			Nim game = new Nim();
 			// Welcome Speech
 			System.out.println("\nWelcome to Rock, Paper, Scissors, Lizard, Spock!\n");
 			System.out.println("Incase you forgot how to spell your options, check out the title.");
@@ -35,42 +35,47 @@ public class SpockClientListener implements Runnable
 			BufferedReader serverInput = new BufferedReader(new InputStreamReader(connectionSock.getInputStream()));
 			while (true)
 			{
-				//System.out.println("Select Weapon: ");
-
-			// Turn handling
+				// Turn handling
 			//	if (playerTurn == 2)
 			//		playerTurn = 1;
 			//	else
 			//		playerTurn = 2;
 			//	System.out.println("It is player " + playerTurn + "'s turn:");
+			
 			//	System.out.println(game.getBoard());
-
-
 				// Get data sent from the server
 				String serverText = serverInput.readLine();
+				String[] serverTextArr = serverText.split(" ");
+				int currPlayer = Integer.parseInt(serverTextArr[2]);
+			        if (game.isValidInputTwo(currPlayer, serverTextArr[0])) {
+					System.out.println("Player " + serverTextArr[2] + " has locked in.");
+					System.out.println();
+				} else if (serverTextArr[0].equals("display")) {
+					System.out.println(game.displayChoices());
+				} else if (serverTextArr[0].equals("go")) {
+					System.out.println(game.displayWinners()); 
+					System.out.println();
+					System.out.println(game.displayChoices());
+				} else {
+				//	System.out.println("serverText: " + serverTextArr[0]);
+					System.out.println();
+					System.out.println("Invalid Input, please try again: ");
+				}      
+				
 				if (serverInput != null)
 				{
-
-					 if (serverInput.equals("LOCK 2")) {
-						System.out.println("Player dos has locked in");
-					}
-			        //  String[] serverTextArr = serverText.split(" ");
+					// get ints from string input, to be used in Nim's updateHeap()
+				//	String[] serverTextArr = serverText.split(" ");
 				//	int heap = Integer.parseInt(serverTextArr[0]);
 				//	int num = Integer.parseInt(serverTextArr[1]);
 				//	game.updateHeap((heap - 1), num);
-				//	if (game.isOver())
-				//	{
-				//		System.out.println("Game over my guys. Player " + playerTurn + " wins.");
-				//		System.out.println("Goodbye, please press enter.");
-				//		connectionSock.close();
-				//		break;
-				//	}      
-
-				System.out.print(serverText);
-                         	System.out.println();
-					// get ints from string input, to be used in Nim's updateHeap()
-					//game.update(serverText);
-					//End game here
+					if (game.isOver())
+					{
+						System.out.println("Game over my guys. Player " + playerTurn + " wins.");
+						System.out.println("Goodbye, please press enter.");
+						connectionSock.close();
+						break;
+					}
 				}
 				else
 				{

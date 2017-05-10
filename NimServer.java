@@ -1,4 +1,4 @@
-// Chinmai Raman and Akash Arora
+// Bobby Kain and Akash
 // edited version of Dr Fahys Server.java
 
 import java.net.ServerSocket;
@@ -9,18 +9,17 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SpockServer
+public class NimServer
 {
 	// Maintain list of all client sockets for broadcast
 	private ArrayList<Socket> socketList;
 
-	Spock game;
+	Nim game;
 
-	public SpockServer()
+	public NimServer()
 	{
 		socketList = new ArrayList<Socket>();
-		game = new Spock();
-		game.reset();
+		game = new Nim();
 	}
 
 	private void getConnection()
@@ -38,7 +37,7 @@ public class SpockServer
 				// Add this socket to the list
 				socketList.add(connectionSock);
 				// Send to ClientHandler the socket and arraylist of all sockets
-				SpockClientHandler handler = new SpockClientHandler(connectionSock, this.socketList, this.game);
+				NimClientHandler handler = new NimClientHandler(connectionSock, this.socketList, this.game);
 				Thread theThread = new Thread(handler);
 				theThread.start();
 			}
@@ -52,8 +51,7 @@ public class SpockServer
 
 	public static void main(String[] args)
 	{
-		SpockServer server = new SpockServer();
+		NimServer server = new NimServer();
 		server.getConnection();
-	//	game.reset();
 	}
-} // SpockServer
+} // NimServer
