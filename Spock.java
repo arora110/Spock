@@ -113,13 +113,18 @@ public class Spock
 
  public String displayWinners() {
 	winners = "";
+	winners += "Rock: " + isAlive[0] + "\n";
+	winners += "Paper: " + isAlive[1] + "\n";
+	winners += "Scissors: " + isAlive[2] + "\n";
+	winners += "Lizard: " + isAlive[3] + "\n";
+	winners += "Spock: " + isAlive[4] + "\n\n";
 	String finalChoices = displayChoices();
 	if (isAlive[0] == 0 && finalChoices.contains("rock")) {
 		winners += "ROCK WINS";
-	} else if(isAlive[1] == 0 && finalChoices.contains("scissors")) {
-        	winners += "SCISSORS WINS";
-        } else if (isAlive[2] == 0 && finalChoices.contains("paper")) {
+	} else if(isAlive[1] == 0 && finalChoices.contains("paper")) {
         	winners += "PAPER WINS";
+        } else if (isAlive[2] == 0 && finalChoices.contains("scissors")) {
+        	winners += "SCISSORS WINS";
         } else if (isAlive[3] == 0 && finalChoices.contains("lizard")) {
         	winners += "LIZARD WINS";
         } else if (isAlive[4] == 0 && finalChoices.contains("spock")) {
