@@ -47,7 +47,6 @@ public class Spock
 	player3 = "";
 	player4 = "";
 	player5 = "";
-//	playerChoices = "";
 	winners = "";
   }
   
@@ -113,22 +112,24 @@ public class Spock
 
  public String displayWinners() {
 	winners = "";
+	/* For Testing Purposes
 	winners += "Rock: " + isAlive[0] + "\n";
 	winners += "Paper: " + isAlive[1] + "\n";
 	winners += "Scissors: " + isAlive[2] + "\n";
 	winners += "Lizard: " + isAlive[3] + "\n";
 	winners += "Spock: " + isAlive[4] + "\n\n";
+	*/
 	String finalChoices = displayChoices();
 	if (isAlive[0] == 0 && finalChoices.contains("rock")) {
-		winners += "ROCK WINS";
+		winners += "ROCK WINS (crushes scissors, crushes lizard)";
 	} else if(isAlive[1] == 0 && finalChoices.contains("paper")) {
-        	winners += "PAPER WINS";
+        	winners += "PAPER WINS (covers rock, disproves spock)";
         } else if (isAlive[2] == 0 && finalChoices.contains("scissors")) {
-        	winners += "SCISSORS WINS";
+        	winners += "SCISSORS WINS (cuts paper, decapitates lizard)";
         } else if (isAlive[3] == 0 && finalChoices.contains("lizard")) {
-        	winners += "LIZARD WINS";
+        	winners += "LIZARD WINS (poisons spock, eats paper)";
         } else if (isAlive[4] == 0 && finalChoices.contains("spock")) {
-        	winners += "SPOCK WINS";
+        	winners += "SPOCK WINS (smashes scissors, vaporizes rock)";
         }
 	return winners; 
   }
