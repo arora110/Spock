@@ -130,7 +130,9 @@ public class Spock
         	winners += "LIZARD WINS (poisons spock, eats paper)";
         } else if (isAlive[4] == 0 && finalChoices.contains("spock")) {
         	winners += "SPOCK WINS (smashes scissors, vaporizes rock)";
-        }
+        } else {
+		winners += "Everyone DIES";
+	}
 	return winners; 
   }
 
