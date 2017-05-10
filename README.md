@@ -2,7 +2,7 @@
 
 ***Game Overview***
 
-Rock Paper Scissors Lizard Spock can be played by up to 5 players. It is a variation
+Rock Paper Scissors Lizard Spock can be played by up to 4 players. It is a variation
 of the classic Rock Paper Scissors game with 2 additional hands that can be played.
 The game connects players through a client-server network paradigm.
 

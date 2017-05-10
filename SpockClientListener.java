@@ -12,8 +12,6 @@ public class SpockClientListener implements Runnable
 {
 	private Socket connectionSock = null;
 
-	int playerTurn = 2;
-
 	SpockClientListener(Socket sock)
 	{
 		this.connectionSock = sock;
@@ -21,11 +19,11 @@ public class SpockClientListener implements Runnable
 
 	public void run()
 	{
-    // Wait for data from the server.  If received, output it.
+                // Wait for data from the server.  If received, output it.
 		try
 		{
 			Spock game = new Spock();
-			// Welcome Speech
+			// Welcome Speech && Rules
 			System.out.println("\nXx-------------------------------------------------------------------------------------------xX");
 			System.out.println("                          Welcome to Rock, Paper, Scissors, Lizard, Spock!\n");
 			System.out.println("Rules:");
@@ -47,26 +45,27 @@ public class SpockClientListener implements Runnable
 				String[] serverTextArr = serverText.split(" ");
 				String command = serverTextArr[0].toLowerCase();
 				int currPlayer = Integer.parseInt(serverTextArr[2]);
+				//Execute user commands
 			        if ((game.isLocked[currPlayer] == 0) && game.isValidInputTwo(currPlayer, serverTextArr[0])) {
 					System.out.println("\nUPDATE: Player " + serverTextArr[2] + " has locked in. Enter 'GO' to run game once all players have locked in.");
 					System.out.println();
-				} else if (command.equals("display")) {
-					System.out.println("\n" + game.displayChoices());
 				} else if (command.equals("go")) {
 					System.out.println("\n" + game.displayWinners()); 
 					System.out.println("\n" + game.displayChoices());
-				} 
-				if (command.equals("reset") || command.equals("go")) {
+				} /* else if (command.equals("display")) {               //For Testing Purposes
+                                        System.out.println("\n" + game.displayChoices());
+                                }  else if (command.equals("locked")) {
+					System.out.println(game.printLocked());
+				} */
+				if(command.equals("reset") || command.equals("go")) {
 					game.reset();
 					System.out.println("\n                                        Game has been RESET\n");
 					System.out.println("Select Weapon: ");
 				}      
-				
 				if (serverInput != null)
 				{
-					if (game.isOver())
+					if (game.isOver == true) //Closes connection
 					{
-						System.out.println("Game over my guys. Player " + playerTurn + " wins.");
 						System.out.println("Goodbye, please press enter.");
 						connectionSock.close();
 						break;

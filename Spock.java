@@ -1,4 +1,4 @@
-// Bobby Kain and Akash Arora
+// Chinmai Raman and Akash Arora
 
 import java.util.*;
 
@@ -9,20 +9,28 @@ public class Spock
 	reset();
   }
 
+  //Records which weapons have/haven't been defeated
   public int isAlive[] = new int[5];
-  public int isLocked[] = new int[5]; 
+  //Records who has selected a weapon 
+  public int isLocked[] = new int[5];
+  //Stores weapon 
   public String player1 = "";
   public String player2 = "";
   public String player3 = "";
   public String player4 = "";
   public String player5 = "";
-  public String winners = "";
+  //For Display
   public String playerChoices = "";
-
+  public String winners = "";
+  //Game state
+  public boolean isOver = false;
+  //Determines if user input is a valid weapon choice, and limits game to five players
   public boolean isValidInputTwo(int playerNumber, String input) {
         input = input.toLowerCase();
         if ((input.equals("rock") || input.equals("paper") || input.equals("scissors") || input.equals("lizard") || input.equals("spock")) && playerNumber <= 5) {
                  assign(playerNumber, input);
+		 kill(input);
+		 playerNumber = playerNumber - 1;
 		 isLocked[playerNumber] = 1;
 		 return true;
         } else {
@@ -30,7 +38,7 @@ public class Spock
         }
   }
 
-
+  //Resets all variables for new game
   public void reset() {
 	isAlive[0] = 0;
 	isAlive[1] = 0;
@@ -48,8 +56,19 @@ public class Spock
 	player4 = "";
 	player5 = "";
 	winners = "";
+	playerChoices = "";
   }
   
+  //Prints which players have/haven't locked in (For Testing Purposes) 
+  public String printLocked() {
+	String result = "";
+	for (int i = 0; i < isLocked.length; i++) {
+		result += isLocked[i];
+	}
+	return result;
+  }
+  
+  //Stores player's weapons
   public void assign(int player, String input) {
 	if(player == 1) {
 		player1 = input;
@@ -61,11 +80,10 @@ public class Spock
 		player4 = input;
 	} else if (player == 5) {
 		player5 = input;
-	}
-	kill(input);		
+	}	
   }
 	
-
+  //Determines and Records which weapons die 
   public void kill(String input) {
 	input = input.toLowerCase();
 	if (input.equals("rock")) { //Rock crushes lizard - and as it always has, rock crushes scissors
@@ -86,8 +104,7 @@ public class Spock
 	}
   }
 
-
-
+  //Prints which player's chose which weapons
   public String displayChoices() {
 	playerChoices = "WEAPON SELECTIONS: \n";
 	if (!player1.equals("")) {
@@ -107,9 +124,8 @@ public class Spock
         } 
 	return playerChoices;
   }
-
-
-
+ 
+ //Prints which weapon won
  public String displayWinners() {
 	winners = "";
 	/* For Testing Purposes
@@ -135,13 +151,4 @@ public class Spock
 	}
 	return winners; 
   }
-
-
-
-  // check win conditions
-  public boolean isOver()
-  {
-  	return false; 
-  }
-
 }
